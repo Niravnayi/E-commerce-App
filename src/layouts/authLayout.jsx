@@ -1,10 +1,9 @@
 import React from "react";
+
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 const AuthLayout = () => {
   let location = useLocation();
-
-  console.log(location);
 
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
@@ -19,7 +18,7 @@ const AuthLayout = () => {
           <Outlet />
           <div className="mt-4 text-center text-sm">
             Already have an account?{" "}
-            <Link to="/login" className="underline">
+            <Link to="/auth/register" className="underline">
               Login
             </Link>
           </div>
@@ -27,7 +26,7 @@ const AuthLayout = () => {
       </div>
       <div className="hidden bg-muted lg:block">
         <img
-          src="/placeholder.svg"
+          src="https://media.istockphoto.com/id/1138637828/photo/surprised-amazing-woman-isolated-on-white-background.jpg?b=1&s=612x612&w=0&k=20&c=foeHX4x_HAgWC0SZS16L-1qTcJt7kKCeL7748IfdrUY="
           alt="Image"
           width="1920"
           height="1080"
