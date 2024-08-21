@@ -4,6 +4,10 @@ import { useForm } from "react-hook-form";
 import FormInput from "../components/form/Input";
 import { Link } from "react-router-dom";
 import CustomForm from "../components/form/CustomForm";
+import FormSelect from "../components/form/Select";
+import FormRadioGroup from "../components/form/RadioGroup";
+import FormCheckbox from "../components/form/Checkbox";
+import FormSlider from "../components/form/Slider";
 
 const wait = (time) =>
   new Promise((resolve) => {
@@ -12,6 +16,7 @@ const wait = (time) =>
 
 const fields = [
   {
+    component: FormInput,
     label: "Name",
     placeholder: "Elon Musk",
     name: "name",
@@ -25,6 +30,7 @@ const fields = [
     },
   },
   {
+    component: FormInput,
     label: "Email",
     placeholder: "elon.musk@tesla.com",
     name: "email",
@@ -39,6 +45,7 @@ const fields = [
     },
   },
   {
+    component: FormInput,
     label: "birthDate",
     placeholder: "dd/mm/yyyy",
     name: "birthDate",
@@ -52,8 +59,113 @@ const fields = [
       },
     },
   },
+  {
+    component: FormSelect,
+    label: "Gender",
+    placeholder: "Select Gender",
+    name: "gender",
+    defaultValue: "",
+    options: [
+      {
+        value: "male",
+        text: "Male",
+      },
+      {
+        value: "female",
+        text: "Female",
+      },
+      {
+        value: "other",
+        text: "Other",
+      },
+    ],
+    rules: {
+      required: {
+        value: true,
+        message: "Gender is mendatory",
+      },
+    },
+  },
+  {
+    component: FormRadioGroup,
+    label: "xyz",
+    name: "xyz",
+    defaultValue: "",
+    options: [
+      {
+        value: "a",
+        text: "A",
+      },
+      {
+        value: "b",
+        text: "B",
+      },
+      {
+        value: "c",
+        text: "C",
+      },
+    ],
+    rules: {
+      required: {
+        value: true,
+        message: "Gender is mendatory",
+      },
+    },
+  },
+  {
+    component: FormCheckbox,
+    label: "Hobbies",
+    name: "hobbies",
+    defaultValue: [],
+    options: [
+      {
+        id: "recents",
+        label: "Recents",
+      },
+      {
+        id: "home",
+        label: "Home",
+      },
+      {
+        id: "applications",
+        label: "Applications",
+      },
+      {
+        id: "desktop",
+        label: "Desktop",
+      },
+      {
+        id: "downloads",
+        label: "Downloads",
+      },
+      {
+        id: "documents",
+        label: "Documents",
+      },
+    ],
+    // rules: {
+    //   required: {
+    //     value: true,
+    //     message: "Password is mendatory",
+    //   },
+    // },
+  },
+  {
+  component: FormSlider,
+  label: "slider",
+  name: "slider",
+  defaultValue: "",
+  // rules: {
+  //   required: {
+  //     value: true,
+  //     message: "BirthDate is mendatory",
+  //   },
+  // },
+},
+
 
   {
+    component: FormInput,
     label: "Password",
     placeholder: "Strong Password",
     name: "password",
@@ -68,6 +180,7 @@ const fields = [
     },
   },
   {
+    component: FormInput,
     label: "Confirm Password",
     placeholder: "Confirm Password",
     name: "confirmPasword",
@@ -85,7 +198,6 @@ const fields = [
 
 function Register() {
   const onSubmit = async (data) => {
-    await wait(5000);
     console.log(data);
   };
 
@@ -98,8 +210,7 @@ function Register() {
         </p>
       </div>
 
-      
-<CustomForm fields={fields} onSubmit={onSubmit} />
+      <CustomForm fields={fields} onSubmit={onSubmit} />
 
       <Button variant="outline" className="w-full">
         Register with Google

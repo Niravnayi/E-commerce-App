@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import FormInput from "./Input";
 import { Button } from "../ui/button";
 
-const CustomForm = ({ fields, onSubmit  }) => {
+const CustomForm = ({ fields, onSubmit }) => {
   const {
     handleSubmit,
     watch,
@@ -13,8 +13,8 @@ const CustomForm = ({ fields, onSubmit  }) => {
 
   return (
     <form className="grid gap-4 w-full" onSubmit={handleSubmit(onSubmit)}>
-      {fields.map((item) => (
-        <FormInput key={item.name} control={control} {...item} />
+      {fields.map(({ component: Component, ...rest }) => (
+        <Component key={rest.name} control={control} {...rest} />
       ))}
 
       <Button
