@@ -1,60 +1,41 @@
 import React from "react";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { useController } from "react-hook-form";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
 
 const FormSelect = ({
-  label,
-  name,
-  control,
-  defaultValue,
-  rules,
-  placeholder,
+  field,
   options,
-  ...props
+  label,
+  className,
+  desc,
+  placeholder,
 }) => {
-  const {
-    field,
-    fieldState: { error },
-  } = useController({
-    name,
-    control,
-    rules,
-    defaultValue,
-  });
-
   return (
-    <div className="grid gap-2">
-      <Label htmlFor={name}>{label}</Label>
-      <Select  onValueChange={field.onChange} defaultValue={field.value}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
+    <FormItem className={className}>
+      <FormLabel>{label}</FormLabel>
+      <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <FormControl>
+          <SelectTrigger>
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+        </FormControl>
         <SelectContent>
-          <SelectGroup>
-            <SelectLabel>{label}</SelectLabel>
-            {options.map((option) => (
-              <SelectItem key={option.value} value={option.value}>{option.text}</SelectItem>
-            ))}
-            {/* <SelectItem value="apple">Apple</SelectItem>
-            <SelectItem value="banana">Banana</SelectItem>
-            <SelectItem value="blueberry">Blueberry</SelectItem>
-            <SelectItem value="grapes">Grapes</SelectItem>
-            <SelectItem value="pineapple">Pineapple</SelectItem> */}
-          </SelectGroup>
+          {options.map((x) => (
+            <SelectItem key={x.value} value={x.value}>
+              {x.text}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
-      {error && <p className="small p-0 !m-0 text-red-400">{error.message}</p>}
-    </div>
+      {desc && <FormDescription>{desc}</FormDescription>}
+      <FormMessage />
+    </FormItem>
   );
 };
 

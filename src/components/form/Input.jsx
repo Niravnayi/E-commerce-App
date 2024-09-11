@@ -2,24 +2,24 @@ import React from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { useController } from "react-hook-form";
+import {
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 
-const FormInput = ({ label, name, control,defaultValue, rules, ...props }) => {
-  const {
-    field,
-    fieldState: { error },
-  } = useController({
-    name,
-    control,
-    rules,
-  defaultValue,
-  });
-
+const FormInput = ({ field, label, className, ...rest }) => {
   return (
-    <div className="grid gap-2">
-      <Label htmlFor={name}>{label}</Label>
-      <Input id={name} type="text" {...props} {...field} />
-      {error && <p className="small p-0 !m-0 text-red-400">{error.message}</p>}
-    </div>
+    <FormItem className={className}>
+      <FormLabel>{label}</FormLabel>
+      <FormControl>
+        <Input {...field} {...rest} />
+      </FormControl>
+      <FormDescription></FormDescription>
+      <FormMessage />
+    </FormItem>
   );
 };
 

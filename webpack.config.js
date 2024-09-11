@@ -7,7 +7,7 @@ module.exports = {
   entry: "./src",
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Nirav Nayi",
+      title: "yagnesh modh",
       template: "./public/index.html",
       filename: "index.html",
     }),
@@ -48,7 +48,7 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'),
+      directory: path.join(__dirname, "public"),
     },
     historyApiFallback: true,
   },

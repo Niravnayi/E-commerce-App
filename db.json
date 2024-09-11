@@ -5,5 +5,31 @@
       "text": "sdf",
       "isDone": false
     }
+  ],
+  "users": [
+    {
+      "email": "niravlimbachia031@gmail.com",
+      "password": "$2a$10$CRyLuI.lEWOg.O33h.MXBOlpbYMoPsJe7xZfNuaZsics6OL0msBYC",
+      "name": "Nirav Nayi",
+      "id": 1
+    },
+    {
+      "email": "niravlimbachia0311@gmail.com",
+      "password": "$2a$10$LdpHWrjmcBHuD6KUjqJd1OyiISINEARioRUHxEOmkIW4uetu8hPzW",
+      "name": "Nirav Nayi",
+      "id": 2
+    },
+    {
+      "email": "niravlimbachia121@gmail.com",
+      "password": "$2a$10$SwPNV1wfm.02JVkIKtCG/epxjUXtv9ecfJ8J1TW1Z06IDNp0W1Yw.",
+      "name": "Nirav Nayi",
+      "id": 3
+    },
+    {
+      "email": "ravi@gmail.com",
+      "password": "$2a$10$DnoaAsCN40sweH3.BKmhm.niELvwuLr8TacxLyqlh/IgkEXeJmzlK",
+      "name": "ravi",
+      "id": 4
+    }
   ]
 }
