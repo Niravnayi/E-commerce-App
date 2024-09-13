@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Home,
   LineChart,
@@ -37,9 +37,19 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../components/ui/tooltip";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import AuthContext from "../context/authContext";
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/auth");
+    }
+  }, [user]);
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -231,13 +241,14 @@ function Dashboard() {
                 />
               </Button>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

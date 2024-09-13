@@ -6,7 +6,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
 
 const FormSelect = ({
   field,

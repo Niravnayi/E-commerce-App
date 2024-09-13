@@ -11,7 +11,7 @@ const FormRadioGroup = ({ field, options, label, className }) => {
         <RadioGroup
           onValueChange={field.onChange}
           defaultValue={field.value}
-          className="flex flex-row space-y-1  "
+          className="flex flex-col space-y-1"
         >
           {options.map((x) => (
             <FormItem

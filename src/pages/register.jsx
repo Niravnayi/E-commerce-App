@@ -1,14 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import CustomForm from "../components/form/ReactHookForm";
 import FormInput from "../components/form/Input";
-
-import { useNavigate } from "react-router-dom";
-
-// const wait = (time) =>
-//   new Promise((resolve) => {
-//     setTimeout(resolve, time);
-//   });
+import { Link, useNavigate } from "react-router-dom";
+import ThemContext from "../context/themeContext";
+import AuthContext from "../context/authContext";
 
 const fields = [
   {
@@ -40,7 +36,6 @@ const fields = [
       },
     },
   },
-
   {
     component: FormInput,
     label: "Password",
@@ -56,7 +51,6 @@ const fields = [
       },
     },
   },
-
   {
     component: FormInput,
     label: "Confirm Password",
@@ -69,48 +63,49 @@ const fields = [
       required: {
         value: true,
         message: "Password is mendatory..",
-      }, 
-      validate : ["compare" , "password"]
+      },
+      validate: (value) => {
+        return (watch) =>
+          value === watch("password") || `value should match with Password`;
+      },
     },
   },
 ];
 
 function Register() {
-  const navigate = useNavigate();
-  const onSubmit = async (data,form) => {
-    try {
-      const { confirmPassword, ...rest } = data;
-      // console.log(rest);
-      
-      const res = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        body: JSON.stringify(rest),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json);
-      
-      console.log(json);
-      navigate("/")
-
-    } catch (error) {
-      form.setError("root",{message:error.message},false)
-      console.log(error);
-      
-    }
-  };
-
   return (
-    <>
-      <CustomForm fields={fields} onSubmit={onSubmit} />
+    <AuthContext.Consumer>
+      {({ register }) => (
+        <>
+          <div className="grid gap-2 text-center">
+            <h1 className="text-3xl font-bold">Register</h1>
+          </div>
+          <CustomForm fields={fields} onSubmit={register} />
 
-      <Button variant="outline" className="w-full">
-        Register with Google
-      </Button>
-    </>
+          <Button variant="outline" className="w-full">
+            Register with Google
+          </Button>
+          <div className="mt-4 text-center text-sm">
+            Already have an account?{" "}
+            <Link to="/auth" className="underline">
+              Login
+            </Link>
+          </div>
+          <ThemContext.Consumer>
+            {(value) => {
+              return (
+                <>
+                  <p>{value?.theme}</p>
+                  <button type="button" onClick={() => value.setTheme("light")}>
+                    Change Theme
+                  </button>
+                </>
+              );
+            }}
+          </ThemContext.Consumer>
+        </>
+      )}
+    </AuthContext.Consumer>
   );
 }
 

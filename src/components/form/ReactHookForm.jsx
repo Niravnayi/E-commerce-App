@@ -16,11 +16,10 @@ const ReactHookForm = ({ fields, onSubmit, className }) => {
   return (
     <Form {...form}>
       {form.formState.errors?.root?.message && (
-        <p className="text-red-500 text-center text-xl">
+        <p className="text-red-400 text-center text-xl">
           {form.formState.errors.root.message}
         </p>
       )}
-
       <form
         className={cn("grid gap-4", className)}
         onSubmit={form.handleSubmit((data) => onSubmit(data, form))}
@@ -28,26 +27,18 @@ const ReactHookForm = ({ fields, onSubmit, className }) => {
         {fields.map(
           ({ component: Component, name, defaultValue, rules, ...rest }) => {
             const { validate, ...restRules } = rules;
-            console.log("validate", validate);
-
-            let compare = () => {};
-
-            if (validate) {
-              compare = (value) => {
-                return (
-                  value === form.watch(validate[1]) ||
-                  `value should Match with ${validate[1]}`
-                );
-              };
-            }
-
             return (
               <FormField
                 key={name}
                 control={form.control}
                 name={name}
                 render={({ field }) => <Component field={field} {...rest} />}
-                rules={{ ...restRules, validate: compare }}
+                rules={{
+                  ...restRules,
+                  ...(validate && {
+                    validate: (value) => validate(value)(form.watch),
+                  }),
+                }}
               />
             );
           }
@@ -55,7 +46,7 @@ const ReactHookForm = ({ fields, onSubmit, className }) => {
 
         <Button
           type="submit"
-          className="w-ful"
+          className="w-full"
           disabled={!form.formState.isValid || form.formState.isSubmitting}
         >
           Register

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Button } from "../components/ui/button";
 import ReactHookForm from "../components/form/ReactHookForm";
 import FormInput from "../components/form/Input";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ThemContext from "../context/themeContext";
+import AuthContext from "../context/authContext";
 
 const fields = [
   {
@@ -38,37 +40,30 @@ const fields = [
 ];
 
 function Login() {
-  const navigate = useNavigate();
-  const onSubmit = async (data, form) => {
-    try {
-      const res = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json);
-
-      console.log(json);
-      navigate("/");
-    } catch (error) {
-      form.setError("root", { message: error.message }, false);
-      console.log(error);
-    }
-  };
-
+  const { login } = useContext(AuthContext);
   return (
     <>
-      <ReactHookForm
-        fields={fields}
-        onSubmit={onSubmit}
-       />
+     <div className="grid gap-2 text-center">
+            <h1 className="text-3xl font-bold">Login</h1>
+            <p className="text-balance text-muted-foreground">
+              Enter your email below to login to your account
+            </p>
+          </div>
+      <ReactHookForm fields={fields} onSubmit={login} />
       <Button variant="outline" className="w-full">
         Login with Google
       </Button>
+      <div className="mt-4 text-center text-sm">
+            Don't have an account?{" "}
+            <Link to="/auth/register" className="underline">
+              Register
+            </Link>
+          </div>
+      <ThemContext.Consumer>
+        {(value) => {
+          return <p>{value.theme}</p>;
+        }}
+      </ThemContext.Consumer>
     </>
   );
 }

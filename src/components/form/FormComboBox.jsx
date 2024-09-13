@@ -19,10 +19,17 @@ import {
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "../../lib/utils";
 
-const FormComboBox = ({ field, options, className }) => {
+const FormComboBox = ({
+  field,
+  options,
+  className,
+  label,
+  placeholder,
+  desc,
+}) => {
   return (
     <FormItem className={cn("flex flex-col", className)}>
-      <FormLabel>Language</FormLabel>
+      <FormLabel>{label}</FormLabel>
       <Popover>
         <PopoverTrigger asChild>
           <FormControl>
@@ -30,23 +37,23 @@ const FormComboBox = ({ field, options, className }) => {
               variant="outline"
               role="combobox"
               className={cn(
-                "w-[200px] justify-between",
+                "justify-between",
                 !field.value && "text-muted-foreground"
               )}
             >
               {field.value
                 ? options.find((language) => language.value === field.value)
                     ?.text
-                : "Select language"}
+                : placeholder}
               <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </FormControl>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0">
+        <PopoverContent className="p-0">
           <Command>
-            <CommandInput placeholder="Search framework..." className="h-9" />
+            <CommandInput placeholder={`Search ${label}...`} className="h-9" />
             <CommandList>
-              <CommandEmpty>No framework found.</CommandEmpty>
+              <CommandEmpty>{`No ${label} found.`}</CommandEmpty>
               <CommandGroup>
                 {options.map((language) => (
                   <CommandItem
@@ -72,9 +79,7 @@ const FormComboBox = ({ field, options, className }) => {
           </Command>
         </PopoverContent>
       </Popover>
-      <FormDescription>
-        This is the language that will be used in the dashboard.
-      </FormDescription>
+      {desc && <FormDescription>{desc}</FormDescription>}
       <FormMessage />
     </FormItem>
   );
