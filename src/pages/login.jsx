@@ -43,22 +43,22 @@ function Login() {
   const { login } = useContext(AuthContext);
   return (
     <>
-     <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
-            </p>
-          </div>
+      <div className="grid gap-2 text-center">
+        <h1 className="text-3xl font-bold">Login</h1>
+        <p className="text-balance text-muted-foreground">
+          Enter your email below to login to your account
+        </p>
+      </div>
       <ReactHookForm fields={fields} onSubmit={login} />
       <Button variant="outline" className="w-full">
         Login with Google
       </Button>
       <div className="mt-4 text-center text-sm">
-            Don't have an account?{" "}
-            <Link to="/auth/register" className="underline">
-              Register
-            </Link>
-          </div>
+        Don't have an account?{" "}
+        <Link to="/auth/register" className="underline">
+          Register
+        </Link>
+      </div>
       <ThemContext.Consumer>
         {(value) => {
           return <p>{value.theme}</p>;

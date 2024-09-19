@@ -9,15 +9,9 @@
   "users": [
     {
       "email": "niravlimbachia031@gmail.com",
-      "password": "$2a$10$/wBno0Vvla9Lv13DgCJDvenU5JquUob2rH84GVbeEHYWwSJYubM0m",
+      "password": "$2a$10$ElxwhOUlgDeBPOl2zFc/7.1Nwg8LVdG/m36HLbkE.nveO5noeD2Nu",
       "name": "Nirav Nayi",
       "id": 1
-    },
-    {
-      "email": "sanjay@gmail.com",
-      "password": "$2a$10$yyatglV0rWO7SvGnOZd6MOR0FpgKNveyRHLtqzsdLwKKWEOVhYtgW",
-      "name": "sanjay",
-      "id": 2
     }
   ]
 }

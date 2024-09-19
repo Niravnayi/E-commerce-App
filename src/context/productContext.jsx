@@ -4,7 +4,7 @@ const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [Products, setProducts] = useState([]);
-
+  
   const loadProducts = async () => {
     try {
       const response = await fetch("http://localhost:3000/products");
